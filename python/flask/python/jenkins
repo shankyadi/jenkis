@@ -1,0 +1,34 @@
+pipeline {
+    agent any
+    environment {
+      // Add credentials if deploying with DockerHub or cloud
+    }
+    stages {
+        stage('Clone Repo') {
+            steps {
+                git 'https://github.com/shankyadi/jenkis.git'
+            }
+        }
+        stage('Install Dependencies') {
+            steps {
+                sh 'pip install -r requirements.txt'
+            }
+        }
+        stage('Run Tests') {
+            steps {
+                // Insert pytest or similar if you have tests
+                echo 'No tests yet'
+            }
+        }
+        stage('Build') {
+            steps {
+                echo 'Build complete'
+            }
+        }
+        stage('Deploy') {
+            steps {
+                sh 'nohup python app.py &'
+            }
+        }
+    }
+}
